@@ -3,208 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Week 2026 - CEB Juan D. Arosemena</title>
+    <title>English Week 2026 - Kids Adventure</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Nunito', sans-serif; scroll-behavior: smooth; }
-        .font-header { font-family: 'Fredoka', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #0D3B66 0%, #1a4b84 50%, #4DA8DA 100%); }
-        .nav-link:hover { color: #3b82f6; transition: color 0.3s; }
-        .day-btn.active { background-color: #1a4b84; color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .hidden { display: none; }
-        .tab-content { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        body { font-family: 'Nunito', sans-serif; scroll-behavior: smooth; background-color: #F0F9FF; overflow-x: hidden; }
+        .font-kids { font-family: 'Fredoka', sans-serif; }
+
+        /* Custom Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            20% { color: #ffcc00; }
+            40% { color: #33cc33; }
+            60% { color: #0066ff; }
+            80% { color: #9900cc; }
+            100% { color: #ff0000; }
+        }
+
+        .floating { animation: float 4s ease-in-out infinite; }
+        .bouncy { animation: bounce-slow 2s ease-in-out infinite; }
+        .rainbow-text { animation: rainbow 5s linear infinite; }
+
+        /* Card Styles */
+        .kid-card {
+            background: white;
+            border-radius: 4rem;
+            padding: 3rem;
+            box-shadow: 0 25px 0 rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 4px solid transparent;
+            text-align: center;
+        }
+        .kid-card:hover {
+            transform: translateY(15px);
+            box-shadow: 0 10px 0 rgba(0,0,0,0.04);
+            border-color: #4DA8DA;
+        }
+
+        .day-btn.active {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 10px 0 rgba(0,0,0,0.1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            line-height: 0;
         }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body>
 
     <!-- HERO SECTION -->
-    <header class="relative h-[75vh] flex items-center justify-center text-center text-white overflow-hidden hero-gradient">
-        <div class="absolute inset-0 opacity-10 pointer-events-none text-6xl">
-            <i class="fas fa-book absolute top-10 left-10 rotate-12"></i>
-            <i class="fas fa-star absolute bottom-20 right-20 -rotate-12"></i>
-            <i class="fas fa-graduation-cap absolute top-1/2 left-1/4 opacity-20"></i>
+    <header class="relative h-screen flex items-center justify-center p-6 text-center overflow-hidden bg-[#0D3B66]">
+        <!-- Animated Background Doodles -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-[10%] left-[10%] text-8xl bouncy">🎈</div>
+            <div class="absolute top-[20%] right-[10%] text-9xl floating" style="animation-delay: 1s;">🚀</div>
+            <div class="absolute bottom-[20%] left-[5%] text-7xl floating">🍭</div>
+            <div class="absolute bottom-[10%] right-[5%] text-[12rem] bouncy" style="animation-delay: 0.5s;">🦖</div>
+            <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white/[0.03] select-none">
+                FUN
+            </div>
         </div>
 
-        <div class="relative z-10 px-6 max-w-4xl">
-            <div class="bg-white/10 backdrop-blur-md p-4 rounded-full inline-block mb-6 border border-white/20 shadow-2xl">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF0xuzT6wn7dLCLbL509xsREDk19m8sx_7w2ELdEXhQF3VJgLYRblSwPA&s=10" alt="School Logo" class="w-20 h-20 rounded-full border-2 border-yellow-400">
+        <div class="relative z-10 max-w-5xl">
+            <div class="inline-block px-10 py-5 bg-yellow-400 rounded-full shadow-[0_10px_0_#ca8a04] transform -rotate-3 mb-8 bouncy">
+                <span class="text-[#0D3B66] font-black text-2xl md:text-3xl uppercase tracking-widest font-kids">Juan D. Arosemena School</span>
             </div>
-            <h2 class="text-yellow-400 font-bold tracking-[0.2em] uppercase mb-2 text-xs font-header">C.E.B. Juan D. Arosemena</h2>
-            <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter uppercase">ENGLISH <span class="text-yellow-300">WEEK 2026</span></h1>
-            <p class="text-xl md:text-2xl font-light mb-10 italic text-blue-100">"Learning Today, Leading Tomorrow"</p>
-            <div class="bg-white/20 backdrop-blur-sm px-8 py-2 rounded-full inline-block text-xs font-bold uppercase tracking-widest border border-white/10">
-                Official Event 2026
-            </div>
+
+            <h1 class="text-7xl md:text-[11rem] font-black leading-none mb-6 tracking-tighter text-white drop-shadow-[0_15px_0_#1a4b84]">
+                ENGLISH<br/>
+                <span class="text-yellow-300 italic">WEEK!</span>
+            </h1>
+
+            <p class="text-2xl md:text-5xl font-black text-cyan-300 mb-12 uppercase tracking-widest drop-shadow-md bouncy">
+                🌟 Let's Play & Learn! 🌟
+            </p>
+
+            <button onclick="document.getElementById('nav-section').scrollIntoView({behavior: 'smooth'})" 
+                    class="bg-white text-[#1a4b84] px-16 py-8 rounded-[3rem] font-black text-4xl hover:scale-110 transition-all shadow-[0_15px_0_#cbd5e1] active:translate-y-2 active:shadow-none font-kids">
+                PLAY NOW! 🏁
+            </button>
+        </div>
+
+        <div class="wave-container">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px; fill: #F0F9FF;">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
         </div>
     </header>
 
-    <!-- NAVIGATION (Institutional Style) -->
-    <nav class="bg-[#e7f0fd] sticky top-0 z-50 shadow-md border-b border-blue-100">
-        <div class="container mx-auto flex justify-center py-5 px-4 gap-12 font-black text-xs uppercase tracking-widest text-[#1a4b84]">
-            <a href="#itinerario" class="nav-link">Schedule</a>
-            <a href="#highlights" class="nav-link border-l border-blue-200 pl-12">Highlights</a>
+    <!-- NAVIGATION -->
+    <nav id="nav-section" class="sticky top-0 z-50 py-10 px-4 bg-white/90 backdrop-blur-2xl border-b-8 border-yellow-400 shadow-xl">
+        <div class="flex justify-center gap-6 overflow-x-auto pb-4 no-scrollbar">
+            <button onclick="updateSchedule('Monday')" id="btn-Monday" class="day-btn active bg-gradient-to-br from-pink-400 to-rose-500 text-white px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">MONDAY</button>
+            <button onclick="updateSchedule('Tuesday')" id="btn-Tuesday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">TUESDAY</button>
+            <button onclick="updateSchedule('Wednesday')" id="btn-Wednesday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">WEDNESDAY</button>
+            <button onclick="updateSchedule('Thursday')" id="btn-Thursday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">THURSDAY</button>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 max-w-4xl mt-12">
+    <main class="container mx-auto px-6 max-w-7xl mt-24 mb-32">
+        <div class="text-center mb-24">
+            <h2 id="current-title" class="inline-block px-14 py-10 rounded-[4rem] text-5xl md:text-8xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 shadow-2xl transform rotate-1">
+                Opening Day Magic! 🎊
+            </h2>
+        </div>
 
-        <!-- SCHEDULE SECTION -->
-        <section id="itinerario" class="bg-white rounded-[2rem] shadow-2xl border border-gray-100 overflow-hidden mb-16">
-            <div class="p-10 border-b border-gray-100 bg-white text-center md:text-left">
-                <h2 id="day-title" class="text-4xl font-black text-[#1a4b84] mb-2 uppercase">Monday Activities</h2>
-                <p class="text-slate-400 font-medium mb-8 uppercase tracking-widest text-xs">Explore the agenda for this week</p>
+        <div id="cards-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <!-- Content will be injected by JS -->
+        </div>
 
-                <div class="flex bg-slate-100 p-1.5 rounded-2xl overflow-x-auto justify-start md:justify-start gap-1">
-                    <button onclick="showDay('Monday', 'Monday Activities')" class="day-btn active px-8 py-3 rounded-xl text-xs font-black transition-all whitespace-nowrap">MONDAY</button>
-                    <button onclick="showDay('Tuesday', 'Trivia Time')" class="day-btn px-8 py-3 rounded-xl text-xs font-black transition-all whitespace-nowrap text-slate-400">TUESDAY</button>
-                    <button onclick="showDay('Wednesday', 'Language Mastery')" class="day-btn px-8 py-3 rounded-xl text-xs font-black transition-all whitespace-nowrap text-slate-400">WEDNESDAY</button>
-                    <button onclick="showDay('Thursday', 'Grand Finale & Expo')" class="day-btn px-8 py-3 rounded-xl text-xs font-black transition-all whitespace-nowrap text-slate-400">THURSDAY</button>
+        <!-- MASCOT SECTION -->
+        <section class="mt-40 bg-[#1a4b84] rounded-[6rem] p-16 md:p-24 text-white relative shadow-2xl border-b-[25px] border-[#0D3B66]">
+             <div class="flex flex-col md:flex-row items-center gap-16 relative z-10 text-center md:text-left">
+                <div class="text-[15rem] bouncy">🦁</div>
+                <div class="flex-1">
+                   <h3 class="text-6xl font-black mb-8 text-yellow-300 uppercase italic">Roar with Joy!</h3>
+                   <p class="text-3xl font-bold leading-relaxed text-blue-50">
+                      "Hello adventurers! Every activity is a magic door to a new word. Let's make this the best English Week ever!"
+                   </p>
                 </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="bg-[#f0f7ff] text-[#1a4b84] text-[10px] uppercase font-black tracking-[0.2em] border-b border-blue-100">
-                            <th class="py-6 px-10">Activity Description</th>
-                            <th class="py-6 px-10 text-right">Location</th>
-                        </tr>
-                    </thead>
-                    <tbody id="schedule-body" class="divide-y divide-slate-50">
-                        <!-- Monday content by default -->
-                        <tr class="tab-content group"><td class="py-8 px-10"><div class="flex items-center gap-5"><span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">🎮</span><div class="flex flex-col"><span class="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">Tic-Tac-Toe Challenge</span><span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span></div></div></td><td class="py-8 px-10 text-right"><span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">School Yard</span></td></tr>
-                        <tr class="tab-content group"><td class="py-8 px-10"><div class="flex items-center gap-5"><span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">💃</span><div class="flex flex-col"><span class="text-base font-bold text-slate-800 leading-tight">Dance Performance</span><span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span></div></div></td><td class="py-8 px-10 text-right"><span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">Theater</span></td></tr>
-                        <tr class="tab-content group"><td class="py-8 px-10"><div class="flex items-center gap-5"><span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">⚽</span><div class="flex flex-col"><span class="text-base font-bold text-slate-800 leading-tight">Ball Control Talent Show</span><span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span></div></div></td><td class="py-8 px-10 text-right"><span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">Gym</span></td></tr>
-                        <tr class="tab-content group"><td class="py-8 px-10"><div class="flex items-center gap-5"><span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">🎵</span><div class="flex flex-col"><span class="text-base font-bold text-slate-800 leading-tight">Presentation of a Song</span><span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span></div></div></td><td class="py-8 px-10 text-right"><span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">Main Stage</span></td></tr>
-                        <tr class="tab-content group"><td class="py-8 px-10"><div class="flex items-center gap-5"><span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">🐝</span><div class="flex flex-col"><span class="text-base font-bold text-slate-800 leading-tight">Spelling Bee Contest</span><span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span></div></div></td><td class="py-8 px-10 text-right"><span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">Library</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
+             </div>
         </section>
-
-        <!-- HIGHLIGHTS SECTION -->
-        <section id="highlights" class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-20 p-10">
-            <h2 class="text-2xl font-black text-[#1a4b84] mb-10 uppercase tracking-tighter">Event Highlights</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <ul class="space-y-8">
-                    <li class="flex gap-5">
-                        <div class="w-3 h-3 bg-[#1a4b84] rounded-full mt-2 shrink-0"></div>
-                        <div>
-                            <h4 class="font-black text-[#1a4b84] text-lg uppercase tracking-tight">STEM & Science</h4>
-                            <p class="text-slate-500 text-sm leading-relaxed mt-2">Interactive chemistry, microorganism studies, and electrostatics exhibitions.</p>
-                        </div>
-                    </li>
-                    <li class="flex gap-5">
-                        <div class="w-3 h-3 bg-[#1a4b84] rounded-full mt-2 shrink-0"></div>
-                        <div>
-                            <h4 class="font-black text-[#1a4b84] text-lg uppercase tracking-tight">Arts & Culture</h4>
-                            <p class="text-slate-500 text-sm leading-relaxed mt-2">Musical performances, drama plays, and cultural stands representing world diversity.</p>
-                        </div>
-                    </li>
-                </ul>
-                <div class="bg-[#1a4b84] rounded-3xl p-10 text-white flex flex-col justify-center relative overflow-hidden">
-                    <div class="relative z-10">
-                       <h3 class="text-2xl font-black italic mb-2 text-yellow-300">Join us!</h3>
-                       <p class="text-blue-100 text-xs uppercase tracking-widest font-bold opacity-60">Learning Today, Leading Tomorrow</p>
-                    </div>
-                    <div class="absolute -right-6 -bottom-6 text-9xl text-white/5 font-black uppercase -rotate-12 pointer-events-none">EN</div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <footer class="py-12 text-center border-t border-gray-100 bg-slate-50">
-        <p class="text-[10px] font-black text-slate-400 tracking-[0.3em] uppercase">Built for C.E.B. Juan D. Arosemena - English Week 2026</p>
+    <footer class="py-24 text-center bg-[#0D3B66] text-white">
+        <div class="flex justify-center gap-10 text-7xl mb-12">
+            <span class="bouncy">🎨</span><span class="bouncy" style="animation-delay: 0.2s">⭐</span><span class="bouncy" style="animation-delay: 0.4s">🎮</span>
+        </div>
+        <h4 class="text-3xl font-black uppercase text-yellow-400 font-kids">CEB Juan D. Arosemena</h4>
     </footer>
 
     <script>
-        const scheduleData = {
-            'Monday': [
-                { activity: 'Tic-Tac-Toe Challenge', location: 'School Yard', icon: '🎮' },
-                { activity: 'Dance Performance', location: 'Theater', icon: '💃' },
-                { activity: 'Ball Control Talent Show', location: 'Gym', icon: '⚽' },
-                { activity: 'Presentation of a Song', location: 'Main Stage', icon: '🎵' },
-                { activity: 'Spelling Bee Contest', location: 'Library', icon: '🐝' }
-            ],
-            'Tuesday': [
-                { activity: 'Trivia Challenge', location: 'Classrooms', icon: '💡' },
-                { activity: 'Whisper Game', location: 'Corridors', icon: '🤫' }
-            ],
-            'Wednesday': [
-                { activity: 'Bingo Word Challenge', location: 'Hall', icon: '🎲' },
-                { activity: 'Memory Challenge with objects', location: 'Science Lab', icon: '🧠' },
-                { activity: 'Unscramble Sentences', location: 'English Lab', icon: '📝' },
-                { activity: 'Spelling Bee Grand Finals', location: 'Auditorium', icon: '🏆' },
-                { activity: 'Wordwall: Science Around the World', location: 'PC Room', icon: '🌐' }
-            ],
-            'Thursday': [
-                { activity: 'TWINS DAY (Dress Code)', location: 'Whole School', icon: '👯' },
-                { activity: 'Musical & Dramatization', location: 'Theater', icon: '🎭' },
-                { activity: 'Chemistry in the Kitchen', location: 'Kitchen Lab', icon: '🧪' },
-                { activity: 'Special Song Presentation', location: 'Auditorium', icon: '🎤' },
-                { activity: 'Speech Contest', location: 'Library', icon: '🗣️' },
-                { activity: 'Micro-organisms & Light Expo', location: 'Science Lab', icon: '🦠' },
-                { activity: 'Electrostatics Exhibition', location: 'Expo Hall', icon: '⚡' },
-                { activity: 'Portugal Culture Stand & Poems', location: 'Square', icon: '🌍' }
-            ]
+        const data = {
+            'Monday': {
+                title: "Opening Day Magic! 🎊",
+                gradient: "from-pink-400 to-rose-500",
+                events: [
+                    { icon: '🎭', name: 'Opening Ceremony', loc: 'Main Stage', desc: 'The grand start!' },
+                    { icon: '⭐', name: 'Opening Activities', loc: 'School Yard', desc: 'Welcome surprises!' },
+                    { icon: '❌⭕', name: 'Tic-Tac-Toe Game', loc: 'Playground', desc: 'Fun logic games' },
+                    { icon: '💃', name: 'Dance Performance', loc: 'Theater', desc: 'Watch us shake!' },
+                    { icon: '⚽', name: 'Ball Control Show', loc: 'Gym', desc: 'Amazing football tricks' },
+                    { icon: '🎵', name: 'Song Presentation', loc: 'Main Stage', desc: 'Singing together' },
+                    { icon: '🐝', name: 'Spelling Bee', loc: 'Library', desc: 'Spelling fun!' }
+                ]
+            },
+            'Tuesday': {
+                title: "Trivia Adventure! 💡",
+                gradient: "from-yellow-400 to-orange-500",
+                events: [
+                    { icon: '🧠', name: 'Trivia Time', loc: 'Classrooms', desc: 'Show what you know!' },
+                    { icon: '🤫', name: 'Whisper Game', loc: 'Hallways', desc: 'Tell a secret!' }
+                ]
+            },
+            'Wednesday': {
+                title: "Word Power Day! 🧩",
+                gradient: "from-cyan-400 to-blue-500",
+                events: [
+                    { icon: '🎲', name: 'Bingo Word', loc: 'Main Hall', desc: 'Shout BINGO!' },
+                    { icon: '🔍', name: 'Memory Challenge', loc: 'Science Lab', desc: 'Find the pairs!' },
+                    { icon: '📝', name: 'Unscramble Sentences', loc: 'English Lab', desc: 'Solve word puzzles' },
+                    { icon: '🏆', name: 'Spelling Bee Finals', loc: 'Auditorium', desc: 'The big champion!' },
+                    { icon: '🌐', name: 'Wordwall Games', loc: 'PC Room', desc: 'Science fun!' }
+                ]
+            },
+            'Thursday': {
+                title: "Grand Party Expo! 🥳",
+                gradient: "from-purple-400 to-indigo-500",
+                events: [
+                    { icon: '👯', name: 'TWINS DAY', loc: 'Everywhere', desc: 'Dress like your friend!' },
+                    { icon: '🎬', name: 'Musical & Drama', loc: 'Theater', desc: 'Stories come alive' },
+                    { icon: '👨‍🍳', name: 'Kitchen Chemistry', loc: 'Kitchen Lab', desc: 'Yummy science' },
+                    { icon: '🗣️', name: 'Speech Contest', loc: 'Library', desc: 'Little speakers' },
+                    { icon: '🧪', name: 'Science Exhibition', loc: 'Science Lab', desc: 'Bugs and Lights' },
+                    { icon: '⚡', name: 'Electrostatics Expo', loc: 'Hall', desc: 'Hair raising fun' },
+                    { icon: '🇵🇹', name: 'Portugal Culture', loc: 'Square', desc: 'Poems and more' },
+                    { icon: '✨', name: 'Closing Activities', loc: 'Main Stage', desc: 'The big goodbye' }
+                ]
+            }
         };
 
-        function showDay(day, title) {
+        function updateSchedule(day) {
+            const current = data[day];
+
             // Update Title
-            document.getElementById('day-title').innerText = title;
+            const titleEl = document.getElementById('current-title');
+            titleEl.innerText = current.title;
+            titleEl.className = `inline-block px-14 py-10 rounded-[4rem] text-5xl md:text-8xl font-black text-white bg-gradient-to-r ${current.gradient} shadow-2xl transform rotate-1`;
 
-            // Update UI Buttons
-            const buttons = document.querySelectorAll('.day-btn');
-            buttons.forEach(btn => {
-                if(btn.innerText === day.toUpperCase()) {
-                    btn.classList.add('active', 'text-white');
-                    btn.classList.remove('text-slate-400');
-                } else {
-                    btn.classList.remove('active', 'text-white');
-                    btn.classList.add('text-slate-400');
-                }
+            // Update Nav Buttons
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.className = "day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all";
             });
+            const activeBtn = document.getElementById(`btn-${day}`);
+            activeBtn.className = `day-btn active bg-gradient-to-br ${current.gradient} text-white px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all`;
 
-            // Update Table Body
-            const body = document.getElementById('schedule-body');
-            const activities = scheduleData[day];
-
-            let html = '';
-            activities.forEach(event => {
-                html += `
-                    <tr class="tab-content group">
-                        <td class="py-8 px-10">
-                            <div class="flex items-center gap-5">
-                                <span class="text-3xl bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:shadow-lg transition-all">${event.icon}</span>
-                                <div class="flex flex-col">
-                                    <span class="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
-                                        ${event.activity}
-                                    </span>
-                                    <span class="text-[10px] text-blue-400 font-black uppercase tracking-widest mt-1 opacity-60">Programmed Activity</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-8 px-10 text-right">
-                            <span class="inline-block text-[10px] font-black px-4 py-2 bg-slate-100 text-slate-500 rounded-lg group-hover:bg-[#1a4b84] group-hover:text-white transition-all shadow-sm">
-                                ${event.location}
-                            </span>
-                        </td>
-                    </tr>
-                `;
-            });
-            body.innerHTML = html;
+            // Update Cards
+            const container = document.getElementById('cards-container');
+            container.innerHTML = current.events.map(ev => `
+                <div class="kid-card group relative overflow-hidden">
+                    <div class="absolute top-0 left-10 right-10 h-4 bg-gradient-to-r ${current.gradient} rounded-b-full"></div>
+                    <div class="text-[9em] mb-10 bouncy group-hover:scale-110 transition-transform">${ev.icon}</div>
+                    <h3 class="text-4xl font-black text-[#1a4b84] mb-4">${ev.name}</h3>
+                    <p class="text-slate-500 font-bold text-xl mb-10 italic">"${ev.desc}"</p>
+                    <div class="inline-flex items-center gap-3 px-8 py-4 rounded-3xl font-black text-white bg-[#0D3B66] text-lg uppercase">
+                        📍 ${ev.loc}
+                    </div>
+                </div>
+            `).join('');
         }
+
+        // Initialize
+        updateSchedule('Monday');
     </script>
 </body>
 </html>
