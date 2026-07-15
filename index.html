@@ -3,57 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Week 2026 - Kids Adventure</title>
+    <title>English Week 2026 - Passport to the World</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Nunito', sans-serif; scroll-behavior: smooth; background-color: #F0F9FF; overflow-x: hidden; }
+        body { 
+            font-family: 'Nunito', sans-serif; 
+            scroll-behavior: smooth; 
+            background-color: #E0F2FE; 
+            overflow-x: hidden; 
+        }
         .font-kids { font-family: 'Fredoka', sans-serif; }
 
         /* Custom Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-40px) rotate(5deg); }
         }
         @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
-        @keyframes rainbow {
-            0% { color: #ff0000; }
-            20% { color: #ffcc00; }
-            40% { color: #33cc33; }
-            60% { color: #0066ff; }
-            80% { color: #9900cc; }
-            100% { color: #ff0000; }
+        @keyframes cloud-move {
+            0% { transform: translateX(-10%); }
+            100% { transform: translateX(10%); }
         }
 
-        .floating { animation: float 4s ease-in-out infinite; }
-        .bouncy { animation: bounce-slow 2s ease-in-out infinite; }
-        .rainbow-text { animation: rainbow 5s linear infinite; }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .bouncy { animation: bounce-slow 3s ease-in-out infinite; }
+        .clouds { animation: cloud-move 10s ease-in-out infinite alternate; }
 
-        /* Card Styles */
-        .kid-card {
+        /* Ticket Design Hooks */
+        .ticket-card {
             background: white;
-            border-radius: 4rem;
-            padding: 3rem;
-            box-shadow: 0 25px 0 rgba(0,0,0,0.04);
+            border-radius: 3rem;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 4px solid transparent;
+            border: 2px solid #f8fafc;
+            position: relative;
             text-align: center;
+            overflow: hidden;
         }
-        .kid-card:hover {
-            transform: translateY(15px);
-            box-shadow: 0 10px 0 rgba(0,0,0,0.04);
-            border-color: #4DA8DA;
+        .ticket-card::before, .ticket-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            background-color: #E0F2FE;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket-card::before { left: -20px; }
+        .ticket-card::after { right: -20px; }
+
+        .ticket-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 0 rgba(29, 78, 216, 0.1);
         }
 
-        .day-btn.active {
+        /* Nav Stamps */
+        .nav-stamp {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+        }
+        .nav-stamp.active {
             transform: scale(1.1) rotate(2deg);
             box-shadow: 0 10px 0 rgba(0,0,0,0.1);
         }
@@ -61,180 +79,243 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .wave-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            line-height: 0;
+        .sound-btn {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            background: #facc15;
+            padding: 1rem;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
+        .sound-btn:active { transform: scale(0.9); }
     </style>
 </head>
 <body>
 
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Sound Control -->
+    <button class="sound-btn" onclick="toggleMusic()" id="musicBtn">🔇</button>
+
     <!-- HERO SECTION -->
-    <header class="relative h-screen flex items-center justify-center p-6 text-center overflow-hidden bg-[#0D3B66]">
-        <!-- Animated Background Doodles -->
+    <header class="relative h-screen flex items-center justify-center p-6 text-center overflow-hidden bg-[#1D4ED8]">
+        <!-- Animated Background -->
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[10%] left-[10%] text-8xl bouncy">🎈</div>
-            <div class="absolute top-[20%] right-[10%] text-9xl floating" style="animation-delay: 1s;">🚀</div>
-            <div class="absolute bottom-[20%] left-[5%] text-7xl floating">🍭</div>
-            <div class="absolute bottom-[10%] right-[5%] text-[12rem] bouncy" style="animation-delay: 0.5s;">🦖</div>
-            <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white/[0.03] select-none">
-                FUN
-            </div>
+            <div class="absolute top-[10%] left-[10%] text-9xl clouds opacity-20">☁️</div>
+            <div class="absolute top-[15%] right-[10%] text-9xl clouds opacity-20" style="animation-delay: 2s;">☁️</div>
+            <div class="absolute top-[15%] left-[15%] text-7xl floating">✈️</div>
+            <div class="absolute top-[25%] right-[15%] text-9xl floating" style="animation-delay: 1s;">🌍</div>
+            <div class="absolute bottom-[25%] left-[10%] text-8xl bouncy">🛂</div>
+            <div class="absolute bottom-[15%] right-[8%] text-[13rem] floating" style="animation-delay: 0.5s;">🛳️</div>
         </div>
 
         <div class="relative z-10 max-w-5xl">
-            <div class="inline-block px-10 py-5 bg-yellow-400 rounded-full shadow-[0_10px_0_#ca8a04] transform -rotate-3 mb-8 bouncy">
-                <span class="text-[#0D3B66] font-black text-2xl md:text-3xl uppercase tracking-widest font-kids">Juan D. Arosemena School</span>
+            <div class="inline-block px-10 py-4 bg-yellow-400 rounded-full shadow-[0_10px_0_#b45309] border-4 border-[#1D4ED8] transform -rotate-2 mb-8 bouncy">
+                <span class="text-[#1D4ED8] font-black text-2xl md:text-3xl uppercase tracking-widest font-kids">Juan D. Arosemena Boarding Pass</span>
             </div>
 
-            <h1 class="text-7xl md:text-[11rem] font-black leading-none mb-6 tracking-tighter text-white drop-shadow-[0_15px_0_#1a4b84]">
-                ENGLISH<br/>
-                <span class="text-yellow-300 italic">WEEK!</span>
+            <h1 class="text-7xl md:text-[10rem] font-black leading-none mb-6 tracking-tighter text-white drop-shadow-[0_15px_0_#1e3a8a]">
+                PASSPORT TO THE<br/>
+                <span class="text-yellow-300 italic">WORLD!</span>
             </h1>
 
-            <p class="text-2xl md:text-5xl font-black text-cyan-300 mb-12 uppercase tracking-widest drop-shadow-md bouncy">
-                🌟 Let's Play & Learn! 🌟
+            <p class="text-2xl md:text-5xl font-black text-cyan-200 mb-12 uppercase tracking-widest bouncy">
+                📍 Ready for Departure? 📍
             </p>
 
-            <button onclick="document.getElementById('nav-section').scrollIntoView({behavior: 'smooth'})" 
-                    class="bg-white text-[#1a4b84] px-16 py-8 rounded-[3rem] font-black text-4xl hover:scale-110 transition-all shadow-[0_15px_0_#cbd5e1] active:translate-y-2 active:shadow-none font-kids">
-                PLAY NOW! 🏁
+            <button onclick="startAdventure()" 
+                    class="bg-green-500 text-white px-16 py-8 rounded-[2.5rem] font-black text-4xl hover:bg-green-600 transition-all shadow-[0_15px_0_#064e3b] border-4 border-white font-kids">
+                STAMP PASSPORT 🎟️
             </button>
         </div>
 
-        <div class="wave-container">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px; fill: #F0F9FF;">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+        <!-- Cloud Transition -->
+        <div class="absolute bottom-0 left-0 w-full leading-[0]">
+            <svg viewBox="0 0 1440 320" class="w-full fill-[#E0F2FE]">
+                <path d="M0,224L60,208C120,192,240,160,360,165.3C480,171,600,213,720,213.3C840,213,960,171,1080,154.7C1200,139,1320,149,1380,154.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
             </svg>
         </div>
     </header>
 
-    <!-- NAVIGATION -->
-    <nav id="nav-section" class="sticky top-0 z-50 py-10 px-4 bg-white/90 backdrop-blur-2xl border-b-8 border-yellow-400 shadow-xl">
+    <!-- NAVIGATION TICKET STATIONS -->
+    <nav id="nav-anchor" class="sticky top-0 z-50 py-10 px-4 bg-white/95 backdrop-blur-xl border-b-8 border-dashed border-blue-500 shadow-2xl">
         <div class="flex justify-center gap-6 overflow-x-auto pb-4 no-scrollbar">
-            <button onclick="updateSchedule('Monday')" id="btn-Monday" class="day-btn active bg-gradient-to-br from-pink-400 to-rose-500 text-white px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">MONDAY</button>
-            <button onclick="updateSchedule('Tuesday')" id="btn-Tuesday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">TUESDAY</button>
-            <button onclick="updateSchedule('Wednesday')" id="btn-Wednesday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">WEDNESDAY</button>
-            <button onclick="updateSchedule('Thursday')" id="btn-Thursday" class="day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all">THURSDAY</button>
+            <button onclick="changeDay('Monday')" id="btn-Monday" class="nav-stamp active bg-gradient-to-br from-blue-400 to-blue-600 text-white px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
+                <span class="text-xs opacity-70 mb-1">STATION</span>MONDAY
+            </button>
+            <button onclick="changeDay('Tuesday')" id="btn-Tuesday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
+                <span class="text-xs opacity-70 mb-1">STATION</span>TUESDAY
+            </button>
+            <button onclick="changeDay('Wednesday')" id="btn-Wednesday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
+                <span class="text-xs opacity-70 mb-1">STATION</span>WEDNESDAY
+            </button>
+            <button onclick="changeDay('Thursday')" id="btn-Thursday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
+                <span class="text-xs opacity-70 mb-1">STATION</span>THURSDAY
+            </button>
         </div>
     </nav>
 
     <main class="container mx-auto px-6 max-w-7xl mt-24 mb-32">
-        <div class="text-center mb-24">
-            <h2 id="current-title" class="inline-block px-14 py-10 rounded-[4rem] text-5xl md:text-8xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 shadow-2xl transform rotate-1">
-                Opening Day Magic! 🎊
-            </h2>
+        <!-- PASSPORT STAMP HEADER -->
+        <div class="flex flex-col items-center mb-24">
+            <div id="day-stamp-box" class="p-2 bg-white rounded-[4rem] shadow-2xl transform rotate-1 border-8 border-dashed border-blue-400">
+                <div class="px-12 py-10 text-center">
+                    <span id="current-country" class="text-xl font-black text-slate-400 uppercase tracking-[0.3em]">Global Station 🌍</span>
+                    <h2 id="current-title" class="text-5xl md:text-7xl font-black mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                        Opening: Passport Check-in! 🛂
+                    </h2>
+                </div>
+            </div>
         </div>
 
-        <div id="cards-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <!-- Content will be injected by JS -->
+        <!-- ACTIVITY GRID -->
+        <div id="grid-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Dynamic Content -->
         </div>
 
-        <!-- MASCOT SECTION -->
-        <section class="mt-40 bg-[#1a4b84] rounded-[6rem] p-16 md:p-24 text-white relative shadow-2xl border-b-[25px] border-[#0D3B66]">
-             <div class="flex flex-col md:flex-row items-center gap-16 relative z-10 text-center md:text-left">
-                <div class="text-[15rem] bouncy">🦁</div>
-                <div class="flex-1">
-                   <h3 class="text-6xl font-black mb-8 text-yellow-300 uppercase italic">Roar with Joy!</h3>
-                   <p class="text-3xl font-bold leading-relaxed text-blue-50">
-                      "Hello adventurers! Every activity is a magic door to a new word. Let's make this the best English Week ever!"
-                   </p>
+        <!-- EXPLORER MASCOT -->
+        <section class="mt-40 bg-gradient-to-br from-blue-700 to-blue-900 rounded-[5rem] p-16 md:p-24 text-white relative shadow-2xl flex flex-col md:flex-row items-center gap-16 border-t-[12px] border-yellow-400">
+             <div class="text-[14rem] bouncy">🦁🗺️</div>
+             <div class="flex-1 text-center md:text-left">
+                <h3 class="text-5xl font-black mb-6 text-yellow-300 uppercase italic">Welcome, Little Explorers!</h3>
+                <p class="text-3xl font-bold leading-relaxed text-blue-100">
+                   "Get your passports ready! Every activity is a new stamp on your journey to learn English. I'll see you at the boarding gate!"
+                </p>
+                <div class="mt-12 flex gap-4 justify-center md:justify-start">
+                   <span class="bg-white/20 px-8 py-3 rounded-2xl font-black uppercase text-sm border-2 border-white/20">🛂 Stamped</span>
+                   <span class="bg-white/20 px-8 py-3 rounded-2xl font-black uppercase text-sm border-2 border-white/20">🌍 Explorer</span>
                 </div>
              </div>
         </section>
     </main>
 
-    <footer class="py-24 text-center bg-[#0D3B66] text-white">
+    <footer class="py-24 text-center bg-white border-t-8 border-yellow-400">
         <div class="flex justify-center gap-10 text-7xl mb-12">
-            <span class="bouncy">🎨</span><span class="bouncy" style="animation-delay: 0.2s">⭐</span><span class="bouncy" style="animation-delay: 0.4s">🎮</span>
+            <span class="bouncy">✈️</span><span class="bouncy" style="animation-delay: 0.2s">🌍</span><span class="bouncy" style="animation-delay: 0.4s">🛂</span>
         </div>
-        <h4 class="text-3xl font-black uppercase text-yellow-400 font-kids">CEB Juan D. Arosemena</h4>
+        <h4 class="text-4xl font-black text-blue-900 uppercase">CEB Juan D. Arosemena</h4>
+        <p class="text-blue-500 font-bold opacity-60 text-xl tracking-[0.4em] uppercase mt-4 underline decoration-yellow-400 decoration-4">Around the World 2026</p>
     </footer>
 
     <script>
-        const data = {
+        const audio = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let isMusicPlaying = false;
+
+        const schedule = {
             'Monday': {
-                title: "Opening Day Magic! 🎊",
-                gradient: "from-pink-400 to-rose-500",
+                title: "Opening: Passport Check-in! 🛂",
+                country: "Global Station 🌍",
+                gradient: "from-blue-400 to-blue-600",
+                border: "border-blue-400",
                 events: [
-                    { icon: '🎭', name: 'Opening Ceremony', loc: 'Main Stage', desc: 'The grand start!' },
-                    { icon: '⭐', name: 'Opening Activities', loc: 'School Yard', desc: 'Welcome surprises!' },
-                    { icon: '❌⭕', name: 'Tic-Tac-Toe Game', loc: 'Playground', desc: 'Fun logic games' },
-                    { icon: '💃', name: 'Dance Performance', loc: 'Theater', desc: 'Watch us shake!' },
-                    { icon: '⚽', name: 'Ball Control Show', loc: 'Gym', desc: 'Amazing football tricks' },
-                    { icon: '🎵', name: 'Song Presentation', loc: 'Main Stage', desc: 'Singing together' },
-                    { icon: '🐝', name: 'Spelling Bee', loc: 'Library', desc: 'Spelling fun!' }
+                    { icon: '✈️', name: 'Opening Ceremony', loc: 'Arrivals Gate', desc: 'Passport check-in!' },
+                    { icon: '🎫', name: 'Opening Activities', loc: 'Duty Free Zone', desc: 'First Stamps!' },
+                    { icon: '❌⭕', name: 'Tic-Tac-Toe Game', loc: 'Game Lounge', desc: 'World logic games' },
+                    { icon: '💃', name: 'Dance Performance', loc: 'Cultural Stage', desc: 'International rhythms' },
+                    { icon: '⚽', name: 'Ball Control Show', loc: 'Sports Arena', desc: 'World Cup skills' },
+                    { icon: '🎤', name: 'Song Presentation', loc: 'Music Terminal', desc: 'Global voices' },
+                    { icon: '🐝', name: 'Spelling Bee', loc: 'Language Lab', desc: 'World speller' }
                 ]
             },
             'Tuesday': {
-                title: "Trivia Adventure! 💡",
-                gradient: "from-yellow-400 to-orange-500",
+                title: "Trivia Expedition! 🗺️",
+                country: "Discovery Zone 🧭",
+                gradient: "from-green-400 to-green-600",
+                border: "border-green-400",
                 events: [
-                    { icon: '🧠', name: 'Trivia Time', loc: 'Classrooms', desc: 'Show what you know!' },
-                    { icon: '🤫', name: 'Whisper Game', loc: 'Hallways', desc: 'Tell a secret!' }
+                    { icon: '🧠', name: 'Trivia Time', loc: 'Explorer Classrooms', desc: 'World Facts!' },
+                    { icon: '🤫', name: 'Whisper Game', loc: 'Secret Passage', desc: 'Secret messages' }
                 ]
             },
             'Wednesday': {
-                title: "Word Power Day! 🧩",
-                gradient: "from-cyan-400 to-blue-500",
+                title: "Island of Games! 🏝️",
+                country: "Puzzle Peninsula 🧩",
+                gradient: "from-yellow-400 to-orange-500",
+                border: "border-orange-400",
                 events: [
-                    { icon: '🎲', name: 'Bingo Word', loc: 'Main Hall', desc: 'Shout BINGO!' },
-                    { icon: '🔍', name: 'Memory Challenge', loc: 'Science Lab', desc: 'Find the pairs!' },
-                    { icon: '📝', name: 'Unscramble Sentences', loc: 'English Lab', desc: 'Solve word puzzles' },
-                    { icon: '🏆', name: 'Spelling Bee Finals', loc: 'Auditorium', desc: 'The big champion!' },
-                    { icon: '🌐', name: 'Wordwall Games', loc: 'PC Room', desc: 'Science fun!' }
+                    { icon: '🎲', name: 'Bingo Word', loc: 'Bingo Bay', desc: 'Global Winners!' },
+                    { icon: '🔍', name: 'Memory Challenge', loc: 'Recall Reef', desc: 'Match symbols' },
+                    { icon: '📝', name: 'Unscramble Sentences', loc: 'Script Sands', desc: 'Fix messages' },
+                    { icon: '🏆', name: 'Spelling Bee Finals', loc: 'Champion Peak', desc: 'World Champ!' },
+                    { icon: '🌐', name: 'Wordwall Games', loc: 'Digital Desert', desc: 'Cyber Wonders' }
                 ]
             },
             'Thursday': {
-                title: "Grand Party Expo! 🥳",
-                gradient: "from-purple-400 to-indigo-500",
+                title: "The Grand World Expo! 🌎",
+                country: "Festival Plaza 🎊",
+                gradient: "from-purple-500 to-indigo-600",
+                border: "border-purple-400",
                 events: [
-                    { icon: '👯', name: 'TWINS DAY', loc: 'Everywhere', desc: 'Dress like your friend!' },
-                    { icon: '🎬', name: 'Musical & Drama', loc: 'Theater', desc: 'Stories come alive' },
-                    { icon: '👨‍🍳', name: 'Kitchen Chemistry', loc: 'Kitchen Lab', desc: 'Yummy science' },
-                    { icon: '🗣️', name: 'Speech Contest', loc: 'Library', desc: 'Little speakers' },
-                    { icon: '🧪', name: 'Science Exhibition', loc: 'Science Lab', desc: 'Bugs and Lights' },
-                    { icon: '⚡', name: 'Electrostatics Expo', loc: 'Hall', desc: 'Hair raising fun' },
-                    { icon: '🇵🇹', name: 'Portugal Culture', loc: 'Square', desc: 'Poems and more' },
-                    { icon: '✨', name: 'Closing Activities', loc: 'Main Stage', desc: 'The big goodbye' }
+                    { icon: '👯', name: 'TWINS DAY', loc: 'Double Destination', desc: 'Travel buddies!' },
+                    { icon: '🎬', name: 'Musical & Drama', loc: 'Broadway Stage', desc: 'Global stories' },
+                    { icon: '👨‍🍳', name: 'Kitchen Chemistry', loc: 'International Cafe', desc: 'Yummy Science' },
+                    { icon: '🗣️', name: 'Speech Contest', loc: 'Plaza of Words', desc: 'Young Diplomats' },
+                    { icon: '🧪', name: 'Science Exhibition', loc: 'Innovation Hub', desc: 'Bugs and Lights' },
+                    { icon: '⚡', name: 'Electrostatics Expo', loc: 'Energy Dome', desc: 'Electric fun' },
+                    { icon: '🇵🇹', name: 'Portugal Stand & Poems', loc: 'Lisbon Corner', desc: 'Special Target' },
+                    { icon: '👋', name: 'Closing Activities', loc: 'Final Boarding Gate', desc: 'Final Party' }
                 ]
             }
         };
 
-        function updateSchedule(day) {
-            const current = data[day];
+        function startAdventure() {
+            document.getElementById('nav-anchor').scrollIntoView({behavior: 'smooth'});
+            if(!isMusicPlaying) toggleMusic();
+        }
 
-            // Update Title
-            const titleEl = document.getElementById('current-title');
-            titleEl.innerText = current.title;
-            titleEl.className = `inline-block px-14 py-10 rounded-[4rem] text-5xl md:text-8xl font-black text-white bg-gradient-to-r ${current.gradient} shadow-2xl transform rotate-1`;
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                musicBtn.innerText = "🔇";
+            } else {
+                audio.play().catch(() => {});
+                musicBtn.innerText = "🔊";
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
 
-            // Update Nav Buttons
-            document.querySelectorAll('.day-btn').forEach(btn => {
-                btn.className = "day-btn bg-white text-slate-400 border-4 border-slate-100 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all";
+        function changeDay(day) {
+            const current = schedule[day];
+
+            // Update Stamps
+            document.getElementById('current-country').innerText = current.country;
+            document.getElementById('current-title').innerText = current.title;
+            document.getElementById('current-title').className = `text-5xl md:text-7xl font-black mt-2 text-transparent bg-clip-text bg-gradient-to-r ${current.gradient}`;
+            document.getElementById('day-stamp-box').className = `p-2 bg-white rounded-[4rem] shadow-2xl transform rotate-1 border-8 border-dashed ${current.border}`;
+
+            // Update Nav
+            document.querySelectorAll('.nav-stamp').forEach(btn => {
+                btn.className = "nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center";
             });
-            const activeBtn = document.getElementById(`btn-${day}`);
-            activeBtn.className = `day-btn active bg-gradient-to-br ${current.gradient} text-white px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all`;
+            const active = document.getElementById(`btn-${day}`);
+            active.className = `nav-stamp active bg-gradient-to-br ${current.gradient} text-white px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center`;
 
             // Update Cards
-            const container = document.getElementById('cards-container');
+            const container = document.getElementById('grid-container');
             container.innerHTML = current.events.map(ev => `
-                <div class="kid-card group relative overflow-hidden">
-                    <div class="absolute top-0 left-10 right-10 h-4 bg-gradient-to-r ${current.gradient} rounded-b-full"></div>
-                    <div class="text-[9em] mb-10 bouncy group-hover:scale-110 transition-transform">${ev.icon}</div>
-                    <h3 class="text-4xl font-black text-[#1a4b84] mb-4">${ev.name}</h3>
-                    <p class="text-slate-500 font-bold text-xl mb-10 italic">"${ev.desc}"</p>
-                    <div class="inline-flex items-center gap-3 px-8 py-4 rounded-3xl font-black text-white bg-[#0D3B66] text-lg uppercase">
-                        📍 ${ev.loc}
+                <div class="ticket-card group">
+                    <div class="text-[10rem] mb-6 bouncy group-hover:scale-110 transition-transform">${ev.icon}</div>
+                    <h3 class="text-3xl font-black text-blue-900 mb-2 uppercase tracking-tighter">${ev.name}</h3>
+                    <p class="text-slate-400 font-bold text-lg mb-8 leading-snug">"${ev.desc}"</p>
+                    <div class="w-full pt-6 border-t-4 border-dotted border-blue-50">
+                        <span class="inline-flex items-center gap-2 px-6 py-2 rounded-xl font-black text-sm text-blue-700 bg-blue-50 uppercase">🛫 ${ev.loc}</span>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Initialize
-        updateSchedule('Monday');
+        // Init
+        changeDay('Monday');
     </script>
 </body>
 </html>
