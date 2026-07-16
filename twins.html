@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Day - English Week Special Event</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Nunito', sans-serif; 
+            background-color: #F0F9FF; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+        }
+        .font-kids { font-family: 'Fredoka', sans-serif; }
+
+        .hero-banner {
+            background: white;
+            border-bottom: 8px dashed #60a5fa;
+        }
+
+        .twins-highlight {
+            position: relative;
+            display: inline-block;
+            padding: 0 1rem;
+        }
+        .twins-highlight::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            background: #facc15;
+            border-radius: 1rem;
+            transform: rotate(-1.5deg);
+            z-index: 0;
+        }
+
+        .guideline-card {
+            background: white;
+            border-radius: 3.5rem;
+            box-shadow: 0 20px 50px rgba(29, 78, 216, 0.08);
+            transition: transform 0.3s ease;
+        }
+        .guideline-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Remember Box Ribbon */
+        .ribbon {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            background: #f472b6;
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 9999px;
+            font-weight: 900;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes bounce-up {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .bouncy-icon { animation: bounce-up 3s ease-in-out infinite; }
+
+        .back-btn {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 100;
+            background: white;
+            color: #1e40af;
+            font-weight: 900;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 3px solid #dbeafe;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+            background: #eff6ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button (Change index.html to your main file name if different) -->
+    <a href="index.html" class="back-btn">
+        ⬅️ <span class="hidden md:inline">BACK TO WORLD TOUR</span>
+    </a>
+        </div>
+    </header>
+    <section class="max-w-6xl mx-auto px-4 md:px-6 py-12 text-center">
+  <img
+    src="imagen (20).png"
+    alt="Twins Day information poster"
+    class="w-full max-w-5xl mx-auto h-auto rounded-3xl md:rounded-[3rem] shadow-2xl border-4 md:border-8 border-yellow-400"
+  >
+</section>
+
+    <main class="container mx-auto px-6 max-w-6xl py-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-12">
+                    <div class="guideline-card p-12 relative">
+                        <div class="ribbon">Guideline 1</div>
+                        <h3 class="text-2xl font-black text-blue-900 mb-4">Dress Alike</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Students are encouraged to dress alike with a friend or classmate. This could be matching outfits, similar colors, or even themed costumes. The goal is to have fun and show creativity!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Illustration -->
+        <div class="mt-24 text-center">
+            <div class="text-[12rem] py-10 bouncy-icon select-none">👕🤝👕</div>
+            <p class="text-4xl font-black text-pink-500 uppercase tracking-widest italic font-kids">Let's Team Up!</p>
+        </div>
+    </main>
+
+    <footer class="py-20 text-center bg-blue-900 text-white mt-20">
+        <div class="flex justify-center gap-6 text-4xl mb-6">🌎⭐✈️</div>
+        <p class="text-xl font-black uppercase tracking-[0.4em] opacity-40">Passport Adventure 2026</p>
+    </footer>
+
+</body>
+</html>
