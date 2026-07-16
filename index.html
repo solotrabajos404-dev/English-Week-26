@@ -18,7 +18,6 @@
         }
         .font-kids { font-family: 'Fredoka', sans-serif; }
 
-        /* Custom Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0); }
             50% { transform: translateY(-40px) rotate(5deg); }
@@ -27,16 +26,10 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-        @keyframes cloud-move {
-            0% { transform: translateX(-10%); }
-            100% { transform: translateX(10%); }
-        }
 
         .floating { animation: float 6s ease-in-out infinite; }
         .bouncy { animation: bounce-slow 3s ease-in-out infinite; }
-        .clouds { animation: cloud-move 10s ease-in-out infinite alternate; }
 
-        /* Ticket Design Hooks */
         .ticket-card {
             background: white;
             border-radius: 3rem;
@@ -47,6 +40,9 @@
             position: relative;
             text-align: center;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .ticket-card::before, .ticket-card::after {
             content: '';
@@ -66,14 +62,25 @@
             box-shadow: 0 20px 0 rgba(29, 78, 216, 0.1);
         }
 
-        /* Nav Stamps */
+        /* Twins Special Styling */
+        .twins-link-card {
+            cursor: pointer;
+            border: 4px solid #f472b6;
+        }
+        .twins-image-container {
+            width: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 4px solid #facc15;
+            margin-bottom: 1rem;
+        }
+
         .nav-stamp {
             transition: all 0.3s ease;
             box-shadow: 0 4px 0 rgba(0,0,0,0.05);
         }
         .nav-stamp.active {
             transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 10px 0 rgba(0,0,0,0.1);
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -90,55 +97,38 @@
             border: 4px solid white;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.2s;
         }
-        .sound-btn:active { transform: scale(0.9); }
     </style>
 </head>
 <body>
 
-    <!-- Audio Player -->
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Sound Control -->
     <button class="sound-btn" onclick="toggleMusic()" id="musicBtn">🔇</button>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <header class="relative h-screen flex items-center justify-center p-6 text-center overflow-hidden bg-[#1D4ED8]">
-        <!-- Animated Background -->
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[10%] left-[10%] text-9xl clouds opacity-20">☁️</div>
-            <div class="absolute top-[15%] right-[10%] text-9xl clouds opacity-20" style="animation-delay: 2s;">☁️</div>
             <div class="absolute top-[15%] left-[15%] text-7xl floating">✈️</div>
             <div class="absolute top-[25%] right-[15%] text-9xl floating" style="animation-delay: 1s;">🌍</div>
             <div class="absolute bottom-[25%] left-[10%] text-8xl bouncy">🛂</div>
-            <div class="absolute bottom-[15%] right-[8%] text-[13rem] floating" style="animation-delay: 0.5s;">🛳️</div>
+            <div class="absolute bottom-[15%] right-[8%] text-[13rem] floating">🛳️</div>
         </div>
 
         <div class="relative z-10 max-w-5xl">
             <div class="inline-block px-10 py-4 bg-yellow-400 rounded-full shadow-[0_10px_0_#b45309] border-4 border-[#1D4ED8] transform -rotate-2 mb-8 bouncy">
                 <span class="text-[#1D4ED8] font-black text-2xl md:text-3xl uppercase tracking-widest font-kids">Juan D. Arosemena Boarding Pass</span>
             </div>
-
             <h1 class="text-7xl md:text-[10rem] font-black leading-none mb-6 tracking-tighter text-white drop-shadow-[0_15px_0_#1e3a8a]">
-                PASSPORT TO THE<br/>
-                <span class="text-yellow-300 italic">WORLD!</span>
+                PASSPORT TO THE<br/><span class="text-yellow-300 italic">WORLD!</span>
             </h1>
-
-            <p class="text-2xl md:text-5xl font-black text-cyan-200 mb-12 uppercase tracking-widest bouncy">
-                📍 Ready for Departure? 📍
-            </p>
-
-            <button onclick="startAdventure()" 
-                    class="bg-green-500 text-white px-16 py-8 rounded-[2.5rem] font-black text-4xl hover:bg-green-600 transition-all shadow-[0_15px_0_#064e3b] border-4 border-white font-kids">
+            <button onclick="startAdventure()" class="bg-green-500 text-white px-16 py-8 rounded-[2.5rem] font-black text-4xl hover:bg-green-600 transition-all shadow-[0_15px_0_#064e3b] border-4 border-white font-kids">
                 STAMP PASSPORT 🎟️
             </button>
         </div>
 
-        <!-- Cloud Transition -->
         <div class="absolute bottom-0 left-0 w-full leading-[0]">
             <svg viewBox="0 0 1440 320" class="w-full fill-[#E0F2FE]">
                 <path d="M0,224L60,208C120,192,240,160,360,165.3C480,171,600,213,720,213.3C840,213,960,171,1080,154.7C1200,139,1320,149,1380,154.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
@@ -146,65 +136,27 @@
         </div>
     </header>
 
-    <!-- NAVIGATION TICKET STATIONS -->
     <nav id="nav-anchor" class="sticky top-0 z-50 py-10 px-4 bg-white/95 backdrop-blur-xl border-b-8 border-dashed border-blue-500 shadow-2xl">
         <div class="flex justify-center gap-6 overflow-x-auto pb-4 no-scrollbar">
-            <button onclick="changeDay('Monday')" id="btn-Monday" class="nav-stamp active bg-gradient-to-br from-blue-400 to-blue-600 text-white px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
-                <span class="text-xs opacity-70 mb-1">STATION</span>MONDAY
-            </button>
-            <button onclick="changeDay('Tuesday')" id="btn-Tuesday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
-                <span class="text-xs opacity-70 mb-1">STATION</span>TUESDAY
-            </button>
-            <button onclick="changeDay('Wednesday')" id="btn-Wednesday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
-                <span class="text-xs opacity-70 mb-1">STATION</span>WEDNESDAY
-            </button>
-            <button onclick="changeDay('Thursday')" id="btn-Thursday" class="nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center">
-                <span class="text-xs opacity-70 mb-1">STATION</span>THURSDAY
-            </button>
+            <button onclick="changeDay('Monday')" id="btn-Monday" class="nav-stamp active bg-blue-500 text-white px-10 py-6 rounded-3xl text-2xl font-black">MONDAY</button>
+            <button onclick="changeDay('Tuesday')" id="btn-Tuesday" class="nav-stamp bg-white text-blue-300 px-10 py-6 rounded-3xl text-2xl font-black border-4 border-blue-50">TUESDAY</button>
+            <button onclick="changeDay('Wednesday')" id="btn-Wednesday" class="nav-stamp bg-white text-blue-300 px-10 py-6 rounded-3xl text-2xl font-black border-4 border-blue-50">WEDNESDAY</button>
+            <button onclick="changeDay('Thursday')" id="btn-Thursday" class="nav-stamp bg-white text-blue-300 px-10 py-6 rounded-3xl text-2xl font-black border-4 border-blue-50">THURSDAY</button>
         </div>
     </nav>
 
-    <main class="container mx-auto px-6 max-w-7xl mt-24 mb-32">
-        <!-- PASSPORT STAMP HEADER -->
-        <div class="flex flex-col items-center mb-24">
-            <div id="day-stamp-box" class="p-2 bg-white rounded-[4rem] shadow-2xl transform rotate-1 border-8 border-dashed border-blue-400">
-                <div class="px-12 py-10 text-center">
-                    <span id="current-country" class="text-xl font-black text-slate-400 uppercase tracking-[0.3em]">Global Station 🌍</span>
-                    <h2 id="current-title" class="text-5xl md:text-7xl font-black mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-                        Opening: Passport Check-in! 🛂
-                    </h2>
-                </div>
+    <main class="container mx-auto px-6 max-w-7xl mt-24 mb-32 text-center">
+        <div id="day-stamp-box" class="inline-block p-2 bg-white rounded-[4rem] shadow-2xl transform rotate-1 border-8 border-dashed border-blue-400 mb-20">
+            <div class="px-12 py-10">
+                <span id="current-country" class="text-xl font-black text-slate-400 uppercase tracking-[0.3em]">Global Station 🌍</span>
+                <h2 id="current-title" class="text-4xl md:text-6xl font-black mt-2 text-blue-600">Opening: Passport Check-in! 🛂</h2>
             </div>
         </div>
 
-        <!-- ACTIVITY GRID -->
         <div id="grid-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Dynamic Content -->
+            <!-- Content Injected via JS -->
         </div>
-
-        <!-- EXPLORER MASCOT -->
-        <section class="mt-40 bg-gradient-to-br from-blue-700 to-blue-900 rounded-[5rem] p-16 md:p-24 text-white relative shadow-2xl flex flex-col md:flex-row items-center gap-16 border-t-[12px] border-yellow-400">
-             <div class="text-[14rem] bouncy">🦁🗺️</div>
-             <div class="flex-1 text-center md:text-left">
-                <h3 class="text-5xl font-black mb-6 text-yellow-300 uppercase italic">Welcome, Little Explorers!</h3>
-                <p class="text-3xl font-bold leading-relaxed text-blue-100">
-                   "Get your passports ready! Every activity is a new stamp on your journey to learn English. I'll see you at the boarding gate!"
-                </p>
-                <div class="mt-12 flex gap-4 justify-center md:justify-start">
-                   <span class="bg-white/20 px-8 py-3 rounded-2xl font-black uppercase text-sm border-2 border-white/20">🛂 Stamped</span>
-                   <span class="bg-white/20 px-8 py-3 rounded-2xl font-black uppercase text-sm border-2 border-white/20">🌍 Explorer</span>
-                </div>
-             </div>
-        </section>
     </main>
-
-    <footer class="py-24 text-center bg-white border-t-8 border-yellow-400">
-        <div class="flex justify-center gap-10 text-7xl mb-12">
-            <span class="bouncy">✈️</span><span class="bouncy" style="animation-delay: 0.2s">🌍</span><span class="bouncy" style="animation-delay: 0.4s">🛂</span>
-        </div>
-        <h4 class="text-4xl font-black text-blue-900 uppercase">CEB Juan D. Arosemena</h4>
-        <p class="text-blue-500 font-bold opacity-60 text-xl tracking-[0.4em] uppercase mt-4 underline decoration-yellow-400 decoration-4">Around the World 2026</p>
-    </footer>
 
     <script>
         const audio = document.getElementById('bgMusic');
@@ -218,11 +170,13 @@
                 gradient: "from-blue-400 to-blue-600",
                 border: "border-blue-400",
                 events: [
-                    { icon: '✈️', name: 'Opening Ceremony', loc: 'Civic Act', desc: 'Passport check-in!' },
-                    { icon: '❌⭕', name: 'Tic-Tac-Toe Game', loc: 'Game Lounge', desc: 'World logic games' },
-                    { icon: '🎤', name: 'Song Presentation contest', loc: 'Music Terminal', desc: 'Global voices' },
-                    { icon: '🐝', name: 'Spelling Bee contest', loc: 'Language Lab', desc: 'World speller' },
-                    { icon: '🧠', name: 'Jeopardy! World Cup Version', loc: 'Explorer Classrooms', desc: 'World Facts!' },
+                    { icon: '✈️', name: 'Opening Ceremony', loc: 'Arrivals Gate' },
+                    { icon: '🎫', name: 'Opening Activities', loc: 'Duty Free' },
+                    { icon: '❌⭕', name: 'Tic-Tac-Toe', loc: 'Game Lounge' },
+                    { icon: '💃', name: 'Dance Performance', loc: 'Stage' },
+                    { icon: '⚽', name: 'Ball Control', loc: 'Arena' },
+                    { icon: '🎤', name: 'Song Presentation', loc: 'Terminal' },
+                    { icon: '🐝', name: 'Spelling Bee', loc: 'Lab' }
                 ]
             },
             'Tuesday': {
@@ -231,8 +185,8 @@
                 gradient: "from-green-400 to-green-600",
                 border: "border-green-400",
                 events: [
-                    { icon: '🧠', name: 'Jeopardy! World Cup Version', loc: 'Explorer Classrooms', desc: 'World Facts!' },
-                    { icon: '🤫', name: 'Whisper Game', loc: 'Secret Passage', desc: 'Secret messages' }
+                    { icon: '🧠', name: 'Trivia Time', loc: 'Classrooms' },
+                    { icon: '🤫', name: 'Whisper Game', loc: 'Passage' }
                 ]
             },
             'Wednesday': {
@@ -241,11 +195,11 @@
                 gradient: "from-yellow-400 to-orange-500",
                 border: "border-orange-400",
                 events: [
-                    { icon: '🎲', name: 'Bingo Word', loc: 'Bingo Bay', desc: 'Global Winners!' },
-                    { icon: '🔍', name: 'Memory Challenge', loc: 'Recall Reef', desc: 'Match symbols' },
-                    { icon: '📝', name: 'Unscramble Sentences', loc: 'Script Sands', desc: 'Fix messages' },
-                    { icon: '🏆', name: 'Spelling Bee Finals', loc: 'Champion Peak', desc: 'World Champ!' },
-                    { icon: '🌐', name: 'Wordwall Games', loc: 'Digital Desert', desc: 'Cyber Wonders' }
+                    { icon: '🎲', name: 'Bingo Word', loc: 'Bingo Bay' },
+                    { icon: '🔍', name: 'Memory', loc: 'Recall Reef' },
+                    { icon: '📝', name: 'Unscramble', loc: 'Sands' },
+                    { icon: '🏆', name: 'Spelling Finals', loc: 'Peak' },
+                    { icon: '🌐', name: 'Wordwall', loc: 'Desert' }
                 ]
             },
             'Thursday': {
@@ -254,18 +208,14 @@
                 gradient: "from-purple-500 to-indigo-600",
                 border: "border-purple-400",
                 events: [
-                    { icon: '👯', name: 'TWINS DAY', loc: 'Double Destination', desc: 'Travel buddies!' },
-                    { icon: '🎬', name: 'Musical & Drama', loc: 'Broadway Stage', desc: 'Global stories' },
-                    { icon: '👨‍🍳', name: 'Kitchen Chemistry', loc: 'International Cafe', desc: 'Yummy Science' },
-                    { icon: '🗣️', name: 'Speech Contest', loc: 'Plaza of Words', desc: 'Young Diplomats' },
-                    { icon: '🧪', name: 'Science Exhibition', loc: 'Innovation Hub', desc: 'Bugs and Lights' },
-                    { icon: '⚡', name: 'Electrostatics Expo', loc: 'Energy Dome', desc: 'Electric fun' },
-                    { icon: '🇵🇹', name: 'Portugal Stand', loc: 'Lisbon Corner', desc: 'Special Target' },
-                    { icon: '🇧🇷', name: 'Brazil Stand', loc: 'Lisbon Corner', desc: 'Special Target' },
-                    { icon: '🇵🇦', name: 'Portugal Stand', loc: 'Lisbon Corner', desc: 'Special Target' },
-                    { icon: '👋', name: 'Closing Activities', loc: 'Final Boarding Gate', desc: 'Final Party' },
-                    { icon: '💃', name: 'Dance Performance', loc: 'Cultural Stage', desc: 'International rhythms' },
-                    { icon: '⚽', name: 'World Cup Skills', loc: 'Sports Arena', desc: 'Ball control performance by answering questions  about Football.' }
+                    { isTwins: true }, // Special Trigger for Twins Day
+                    { icon: '🎬', name: 'Musical & Drama', loc: 'Broadway' },
+                    { icon: '👨‍🍳', name: 'Kitchen Chemistry', loc: 'Cafe' },
+                    { icon: '🗣️', name: 'Speech Contest', loc: 'Plaza' },
+                    { icon: '🧪', name: 'Science Expo', loc: 'Innovation' },
+                    { icon: '⚡', name: 'Electrostatics', loc: 'Energy Dome' },
+                    { icon: '🇵🇹', name: 'Portugal Stand', loc: 'Corner' },
+                    { icon: '👋', name: 'Closing', loc: 'Gate' }
                 ]
             }
         };
@@ -276,50 +226,45 @@
         }
 
         function toggleMusic() {
-            if (isMusicPlaying) {
-                audio.pause();
-                musicBtn.innerText = "🔇";
-            } else {
-                audio.play().catch(() => {});
-                musicBtn.innerText = "🔊";
-            }
+            if (isMusicPlaying) { audio.pause(); musicBtn.innerText = "🔇"; } 
+            else { audio.play().catch(() => {}); musicBtn.innerText = "🔊"; }
             isMusicPlaying = !isMusicPlaying;
         }
 
         function changeDay(day) {
             const current = schedule[day];
-
-            // Update Stamps
             document.getElementById('current-country').innerText = current.country;
             document.getElementById('current-title').innerText = current.title;
-            document.getElementById('current-title').className = `text-5xl md:text-7xl font-black mt-2 text-transparent bg-clip-text bg-gradient-to-r ${current.gradient}`;
-            document.getElementById('day-stamp-box').className = `p-2 bg-white rounded-[4rem] shadow-2xl transform rotate-1 border-8 border-dashed ${current.border}`;
 
-            // Update Nav
             document.querySelectorAll('.nav-stamp').forEach(btn => {
-                btn.className = "nav-stamp bg-white text-blue-900/40 border-4 border-blue-50 px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center";
+                btn.className = "nav-stamp bg-white text-blue-300 px-10 py-6 rounded-3xl text-2xl font-black border-4 border-blue-50";
             });
-            const active = document.getElementById(`btn-${day}`);
-            active.className = `nav-stamp active bg-gradient-to-br ${current.gradient} text-white px-10 py-6 rounded-3xl text-2xl font-black flex flex-col items-center`;
+            document.getElementById(`btn-${day}`).className = `nav-stamp active bg-blue-500 text-white px-10 py-6 rounded-3xl text-2xl font-black`;
 
-            // Update Cards
             const container = document.getElementById('grid-container');
-            container.innerHTML = current.events.map(ev => `
-                <div class="ticket-card group">
-                    <div class="text-[10rem] mb-6 bouncy group-hover:scale-110 transition-transform">${ev.icon}</div>
-                    <h3 class="text-3xl font-black text-blue-900 mb-2 uppercase tracking-tighter">${ev.name}</h3>
-                    <p class="text-slate-400 font-bold text-lg mb-8 leading-snug">"${ev.desc}"</p>
-                    <div class="w-full pt-6 border-t-4 border-dotted border-blue-50">
-                        <span class="inline-flex items-center gap-2 px-6 py-2 rounded-xl font-black text-sm text-blue-700 bg-blue-50 uppercase">🛫 ${ev.loc}</span>
+            container.innerHTML = current.events.map(ev => {
+                if (ev.isTwins) {
+                    return `
+                        <div onclick="window.location.href='twins.html'" class="ticket-card twins-link-card group">
+                            <div class="twins-image-container">
+                                <img src="https://placehold.co/600x800/facc15/1e3a8a?text=TWINS+DAY+INFO" alt="Twins Day Poster" class="w-full h-auto">
+                            </div>
+                            <h3 class="text-3xl font-black text-pink-500 uppercase italic">SEE DETAILS 📋</h3>
+                            <p class="text-slate-400 font-bold mt-2">Click to open ticket!</p>
+                        </div>
+                    `;
+                }
+                return `
+                    <div class="ticket-card">
+                        <div class="text-[8rem] mb-4 bouncy">${ev.icon}</div>
+                        <h3 class="text-3xl font-black text-blue-900 uppercase tracking-tighter">${ev.name}</h3>
+                        <div class="mt-4 pt-4 border-t-2 border-dotted border-blue-100 w-full text-blue-500 font-black">🛫 ${ev.loc}</div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
-        // Init
         changeDay('Monday');
     </script>
 </body>
-</html>
-
 </html>
