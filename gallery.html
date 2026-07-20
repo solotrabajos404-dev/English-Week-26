@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Gallery — English Week 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:sans-serif;background:linear-gradient(180deg,#E0F2FE,#fff);margin:0}
+    .thumb{width:100%;height:180px;object-fit:cover;border-radius:.75rem}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,.6);z-index:90}
+    .modal img{max-width:90%;max-height:80%;border-radius:12px}
+  </style>
+</head>
+<body class="p-4">
+  <header class="text-center mb-6">
+    <h1 class="text-3xl font-extrabold">English Week 2026 — Gallery</h1>
+    <p class="text-slate-600">Approved uploads only</p>
+  </header>
+
+  <main class="max-w-6xl mx-auto">
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true"><div class="bg-white p-4 rounded-xl"><button id="close" class="mb-2 px-3 py-1 bg-yellow-400 rounded-full">Close</button><div id="modalContent"></div></div></div>
+
+  <script>
+    const SCRIPT_JSON_URL = 'https://script.google.com/macros/s/AKfycby4OTskCBtmt_Efv6SR99vFh2oWo9P6GOSJMLlW1r0qg9nR0q7U25blC3Fl-Xjc61S02Q/exec';
+
+    async function loadGallery(){
+      const res = await fetch(SCRIPT_JSON_URL);
+      const data = await res.json();
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      if(!data || data.length===0){ grid.innerHTML='<div class="col-span-full text-center text-slate-400 p-6">No approved uploads yet.</div>'; return; }
+      data.forEach(item=>{
+        const card = document.createElement('div');
+        card.className = 'bg-white p-3 rounded-xl shadow-md';
+        const img = document.createElement('img');
+        img.className='thumb';
+        img.src = item.publicUrl || item.fileRaw || '';
+        img.alt = item.caption || '';
+        img.addEventListener('click', ()=> openModal(item));
+        const cap = document.createElement('div');
+        cap.className='mt-2 text-sm font-semibold';
+        cap.textContent = item.caption || item.activity || '';
+        card.appendChild(img); card.appendChild(cap);
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(item){
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modalContent');
+      content.innerHTML = '';
+      const img = document.createElement('img'); img.src = item.publicUrl || item.fileRaw; img.alt = item.caption || '';
+      content.appendChild(img);
+      modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    }
+    document.getElementById('close').addEventListener('click', ()=>{ document.getElementById('modal').style.display='none'; document.body.style.overflow='';});
+    document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') { document.getElementById('modal').style.display='none'; document.body.style.overflow=''; }});
+
+    loadGallery();
+  </script>
+</body>
+</html>
